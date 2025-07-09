@@ -6,14 +6,15 @@ const user = require('./models/user');
 // const {adminAuth, userAuth} = require('./middlewares/auth');
 
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 app.post("/signup", async(req, res) => {
+
+
+  console.log(req.body)
 //creating a new instance of the User model
- const user = new User({
-  firstName: "Virat",
- lastName: "Kohli",
- email: "Virat123@gmail.com ",
- password: "Test@123",
-});
+  const user = new User(req.body);
 
 try {
   // Saving the user to the database
