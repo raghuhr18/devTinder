@@ -18,3 +18,11 @@ differences between carat and tilde
 - Routing with use of ?, +, *, (), regex
 - Read the query parameters in the routes
 - Read the dynamic routes 
+
+05.
+- Multiple Route handlers
+- next()
+- next function and Errors along with res.send
+- app.use("/route", rH1, rH2, [rH3, rH4], rH5)
+- What is middleware
+- How Express JS handles requests behind the scenes
