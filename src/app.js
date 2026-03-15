@@ -1,24 +1,27 @@
 const express = require('express');
+const { isAdminAuthorized, isUserAuthenticated } = require('./middlewares/auth');
 
 const app = express();
 
-app.get('/user', (req, res) => {
-    res.send('This is from the get call');
-});
+app.use("/admin", isAdminAuthorized)
 
-app.post('/user', (req, res) => {
-    res.send('This is from the post call');
-});
-app.delete('/user', (req, res) => {
-    res.send('This is from the delete call');
-});
-app.put('/user', (req, res) => {
-    res.send('This is from the put call');
-});
-
-app.use("/test", (req, res) => {
-    res.send('Hello, World! hello from test route');
+app.use("/user/login", (req, res) => {
+    res.send("User logged in successfully");
 })
+
+app.get("/admin/getAllUsers", (req, res) => {
+    res.send("All users data");
+})
+
+app.delete("/admin/deleteUser", (req, res) => {
+    res.send("User deleted");
+})
+
+app.use("/user", isUserAuthenticated,
+    (req, res, next) => {
+        res.send("getting all the user details");
+    })
+
 app.listen(7778, () => {
     console.log('Server is running on port 7778');
 });
