@@ -1,27 +1,26 @@
 const express = require('express');
-const { isAdminAuthorized, isUserAuthenticated } = require('./middlewares/auth');
+const connectDB = require('./config/database');
 
 const app = express();
+const User = require("./models/user")
 
-app.use("/admin", isAdminAuthorized)
-
-app.use("/user/login", (req, res) => {
-    res.send("User logged in successfully");
-})
-
-app.get("/admin/getAllUsers", (req, res) => {
-    res.send("All users data");
-})
-
-app.delete("/admin/deleteUser", (req, res) => {
-    res.send("User deleted");
-})
-
-app.use("/user", isUserAuthenticated,
-    (req, res, next) => {
-        res.send("getting all the user details");
+app.post("/signup", async(req, res) => {
+    const user = new User({
+        firstName : "Virat",
+        lastName : "Kohli",
+        emailId : "virat@kohli.com",
+        password : "virat@123"
     })
+    await user.save();
+    res.send("user added successfully")
+})
 
-app.listen(7778, () => {
-    console.log('Server is running on port 7778');
+connectDB().
+then(() => {
+    console.log('Database connection established');
+    app.listen(7778, () => {
+        console.log('Server is running on port 7778');
+    });
+}).catch((err) => {
+    console.error('Database connection failed:', err);
 });
