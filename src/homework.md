@@ -48,3 +48,7 @@ To make it correct, exported connectDB from the file and added the details in th
 Created a model folder and user.js inside it > created a user schema and User model and export that
 Created POST/ signup api with the static data...
 Push some documents using API calls using postman
+
+learn the difference between the Javascript object and JSON
+Add the expree.json middleware.
+Now get the json data from the outside( postam/ from user)
